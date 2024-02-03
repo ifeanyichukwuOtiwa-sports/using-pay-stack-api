@@ -1,6 +1,7 @@
 [versions]
 spring-boot = "3.2.2"
 spring-dependency-management = "1.1.4"
+sonarqube-version = "3.5.0.2730"
 
 [libraries]
 lombok = { module = "org.projectlombok:lombok" }
@@ -23,3 +24,8 @@ test = [
     "spring-boot-starter-test",
     "spring-boot-testcontainers"
 ]
+
+[plugins]
+sonarqube = { id = "org.sonarqube", version.ref = "sonarqube-version"  }
+spring-boot-plugin = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }

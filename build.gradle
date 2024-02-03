@@ -1,10 +1,12 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.2.2'
-    id 'io.spring.dependency-management' version '1.1.4'
+    alias(libs.plugins.spring.boot.plugin)
+    alias(libs.plugins.spring.dependency.management)
+    id 'jacoco'
+    alias(libs.plugins.sonarqube)
 }
 
-group = 'io.wintech'
+group = 'io.wtech'
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -30,6 +32,20 @@ dependencies {
     testImplementation libs.bundles.test
 }
 
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
+
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+sonar {
+    properties {
+        property "sonar.projectKey", "ifeanyichukwuOtiwa-sports_using-pay-stack-api"
+        property("sonar.organization", "ifeanyichukwuotiwa-sports")
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
 }
