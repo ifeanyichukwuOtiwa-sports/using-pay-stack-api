@@ -25,7 +25,7 @@ class UsingPaystackApplicationTests {
         @Bean
         @ServiceConnection
         static MySQLContainer<?> mysqlContainer() {
-            return new MySQLContainer<>(DockerImageName.parse("mysql:latest"));
+            return new MySQLContainer<>(DockerImageName.parse("mysql:8.0.29"));
         }
     }
 
