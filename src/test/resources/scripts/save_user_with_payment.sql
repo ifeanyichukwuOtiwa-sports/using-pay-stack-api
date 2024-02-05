@@ -1,0 +1,2 @@
+INSERT INTO app_user(id, username, name, address, created_on) VALUES (UUID_TO_BIN('64837b69-1f73-4bb4-b9e1-6f3e98469d4d'),'username','name','address',NOW());
+INSERT INTO paystack_payments(id, user_id, reference, amount, paid_at, created_at, channel, currency, ip_address, pricing_plan_type, created_on, gateway_response) VALUES (UUID_TO_BIN(UUID()),UUID_TO_BIN('64837b69-1f73-4bb4-b9e1-6f3e98469d4d'),'reference',10000.05,'paid_at','created_at','channel','Dollars','10.192.169.101','BASIC',NOW(), 'response')

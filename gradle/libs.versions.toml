@@ -2,12 +2,14 @@
 spring-boot = "3.2.2"
 spring-dependency-management = "1.1.4"
 sonarqube-version = "4.4.1.3373"
+liquibase-version = "4.23.1"
 
 [libraries]
 lombok = { module = "org.projectlombok:lombok" }
 mysql = { module = "com.mysql:mysql-connector-j" }
 
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-starter-validations = { module = "org.springframework.boot:spring-boot-starter-validation" }
 spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 spring-boot-testcontainers = { module = "org.springframework.boot:spring-boot-testcontainers" }
@@ -15,7 +17,7 @@ spring-boot-testcontainers = { module = "org.springframework.boot:spring-boot-te
 testcontainers-junit-jupiter = { module = "org.testcontainers:junit-jupiter" }
 testcontainers-mysql = { module = "org.testcontainers:mysql" }
 
-liquibase = { module = "org.liquibase:liquibase-core" }
+liquibase = { module = "org.liquibase:liquibase-core", version.ref = "liquibase-version" }
 
 [bundles]
 test = [

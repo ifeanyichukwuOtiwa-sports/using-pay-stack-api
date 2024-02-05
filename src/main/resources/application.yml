@@ -1,7 +1,10 @@
 spring:
-  liquibase:
-    change-log: classpath:changelogs/changelog-master.yaml
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/api_paystack}
     username: ${SPRING_DATASOURCE_USERNAME:root}
     password: ${SPRING_DATASOURCE_PASSWORD:123456}
+app:
+  paystack:
+    secret-key: ${SECRET_KEY:sk_test_18db2c8678a6708be863a534ba156daa191415a2}
+    read-timeout: ${READ_TIMEOUT:3000}
+    connection-timeout: ${CONNECTION_TIMEOUT:3000}
