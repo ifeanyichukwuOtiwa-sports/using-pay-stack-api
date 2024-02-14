@@ -136,6 +136,19 @@ class PaystackControllerTest {
                .andExpect(MockMvcResultMatchers.status().is4xxClientError());
     }
 
+
+    @Test
+    void paymentVerification_with_invalid_plan() throws Exception {
+        final String reference = "reference";
+        final UUID id = UUID.randomUUID();
+
+        mockMvc.perform(
+                        MockMvcRequestBuilders.get("/api/v1/payment/verifypayment/{reference}/{plan}/{id}", reference, "", id)
+                                .accept("application/json")
+                )
+                .andExpect(MockMvcResultMatchers.status().is4xxClientError());
+    }
+
     @ParameterizedTest
     @NullSource
     @EmptySource
@@ -145,6 +158,20 @@ class PaystackControllerTest {
 
         mockMvc.perform(
                         MockMvcRequestBuilders.get("/api/v1/payment/verifypayment/{reference}/{plan}/{id}", nullReference, plan, id)
+                                .accept("application/json")
+                )
+                .andExpect(MockMvcResultMatchers.status().is4xxClientError());
+
+    }
+
+
+    @Test
+    void paymentVerification_with_invalid_reference() throws Exception {
+        final UUID id = UUID.randomUUID();
+        final String plan = "BASIC";
+
+        mockMvc.perform(
+                        MockMvcRequestBuilders.get("/api/v1/payment/verifypayment/{reference}/{plan}/{id}", "", plan, id)
                                 .accept("application/json")
                 )
                 .andExpect(MockMvcResultMatchers.status().is4xxClientError());
