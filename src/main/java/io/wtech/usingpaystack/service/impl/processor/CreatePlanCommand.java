@@ -4,23 +4,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.wtech.usingpaystack.constant.APIConstant;
 import io.wtech.usingpaystack.dto.CreatePlanDto;
 import io.wtech.usingpaystack.response.CreatePlanResponse;
-import io.wtech.usingpaystack.service.api.PaymentCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
-import java.net.URI;
 import java.util.Optional;
 
 @RequiredArgsConstructor
 @Component
 @Slf4j
-public class CreatePlanCommand implements PaymentCommand<CreatePlanDto, CreatePlanResponse> {
+public class CreatePlanCommand {
     private final RestClient restClient;
     private final ObjectMapper mapper;
-    @Override
+
     public CreatePlanResponse execute(final CreatePlanDto request) {
         io.wtech.usingpaystack.response.CreatePlanResponse createPlanResponse = null;
 
