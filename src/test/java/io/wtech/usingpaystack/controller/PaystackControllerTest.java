@@ -10,7 +10,6 @@ import io.wtech.usingpaystack.service.api.PaystackService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
-import org.junit.jupiter.params.provider.NullSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -122,42 +121,26 @@ class PaystackControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Payment verification failed"));
     }
 
-    @ParameterizedTest
-    @EmptySource
-    @NullSource
-    void paymentVerification_with_invalid_plan(String nullPlan) throws Exception {
-        final String reference = "reference";
-        final UUID id = UUID.randomUUID();
-
-        mockMvc.perform(
-                    MockMvcRequestBuilders.get("/api/v1/payment/verifypayment/{reference}/{plan}/{id}", reference, nullPlan, id)
-                           .accept("application/json")
-            )
-               .andExpect(MockMvcResultMatchers.status().is4xxClientError());
-    }
-
-
     @Test
     void paymentVerification_with_invalid_plan() throws Exception {
         final String reference = "reference";
         final UUID id = UUID.randomUUID();
 
         mockMvc.perform(
-                        MockMvcRequestBuilders.get("/api/v1/payment/verifypayment/{reference}/{plan}/{id}", reference, "", id)
+                        MockMvcRequestBuilders.get("/api/v1/payment/verifypayment/{reference}/ /{id}", reference, id)
                                 .accept("application/json")
                 )
-                .andExpect(MockMvcResultMatchers.status().is4xxClientError());
+                .andExpect(MockMvcResultMatchers.status().is4xxClientError())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("reference, plan and id must be provided in path"));
     }
 
     @ParameterizedTest
-    @NullSource
     @EmptySource
     void paymentVerification_with_invalid_reference(final String nullReference) throws Exception {
         final UUID id = UUID.randomUUID();
-        final String plan = "BASIC";
 
         mockMvc.perform(
-                        MockMvcRequestBuilders.get("/api/v1/payment/verifypayment/{reference}/{plan}/{id}", nullReference, plan, id)
+                        MockMvcRequestBuilders.get("/api/v1/payment/verifypayment/{reference}/ /{id}", nullReference, id)
                                 .accept("application/json")
                 )
                 .andExpect(MockMvcResultMatchers.status().is4xxClientError());
@@ -171,10 +154,11 @@ class PaystackControllerTest {
         final String plan = "BASIC";
 
         mockMvc.perform(
-                        MockMvcRequestBuilders.get("/api/v1/payment/verifypayment/{reference}/{plan}/{id}", "", plan, id)
+                        MockMvcRequestBuilders.get("/api/v1/payment/verifypayment/ /{plan}/{id}",  plan, id)
                                 .accept("application/json")
                 )
-                .andExpect(MockMvcResultMatchers.status().is4xxClientError());
+                .andExpect(MockMvcResultMatchers.status().is4xxClientError())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("reference, plan and id must be provided in path"));
 
     }
 
