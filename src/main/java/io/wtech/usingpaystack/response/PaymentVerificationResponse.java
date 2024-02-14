@@ -23,22 +23,22 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 public class PaymentVerificationResponse {
 
-    @JsonProperty("status")
-    private String status;
+    @JsonProperty("data")
+    private Data data;
 
     @JsonProperty("message")
     private String message;
 
-    @JsonProperty("data")
-    private Data data;
+    @JsonProperty("status")
+    private String status;
 
-    @Getter
-    @Setter
     @AllArgsConstructor
     @NoArgsConstructor
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonIgnoreProperties(ignoreUnknown = true)
     @EqualsAndHashCode
+    @Getter
+    @Setter
     public static class Data{
 
         @JsonProperty("status")
@@ -77,4 +77,5 @@ public class PaymentVerificationResponse {
         @JsonProperty("updated_on")
         private LocalDateTime updatedOn = LocalDateTime.now();
     }
+
 }
