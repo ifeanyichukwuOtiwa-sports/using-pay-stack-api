@@ -50,16 +50,7 @@ public class PaystackController {
     }
 
     private void validateParams(final String reference, final String plan) {
-        if (
-                Objects.isNull(reference)
-                        || Objects.isNull(plan)
-                        || !StringUtils.hasText(reference)
-                        || !StringUtils.hasText(plan)
-                        || reference.equals("%20")
-                        || plan.equals("%20")
-
-
-        ) {
+        if (!StringUtils.hasText(reference) || !StringUtils.hasText(plan)) {
             throw new WrongParamsException("reference, plan and id must be provided in path");
         }
     }
